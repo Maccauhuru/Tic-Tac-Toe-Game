@@ -14,10 +14,27 @@ const winCombos = [
 ];
 
 const cells = document.querySelectorAll('.cell');
+
+
+
 const startGame = ()=>{
     let endGame = document.querySelector(".endgame");
     endGame.style.display="none";
     origBoard = Array.from(Array(9).keys());
+    for(let i=0;i<cells.length;i++){
+        cells[i].innerText = '';
+        cells[i].style.removeProperty('background-color');
+        cells[i].addEventListener('click',turnClick,false);
+    }
+};
+
+const turnClick =(square)=>{
+    turn(square.target.id ,huPlayer);
+};
+
+const turn =(squareID,player)=>{
+    origBoard[squareID] = player;
+    document.getElementById(squareID).innerText = player;
 };
 
 startGame();
