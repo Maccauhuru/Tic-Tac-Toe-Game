@@ -29,7 +29,10 @@ const startGame = ()=>{
 };
 
 const turnClick =(square)=>{
-    turn(square.target.id ,huPlayer);
+if (typeof origBoard[square.target.id] == "number") {
+  turn(square.target.id, huPlayer);
+  if (!checkTie()) turn(bestSpot(), aiPlayer);
+}
 };
 
 const turn =(squareID,player)=>{
@@ -64,7 +67,33 @@ const gameOver=(gameWon)=>{
     for (let i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnClick, false);
     }
+    declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+};
+
+const declareWinner=(who)=>{
+document.querySelector(".endgame").style.display = "block";
+document.querySelector(".endgame .text").innerText = who;
+};
+
+const bestSpot=()=>{
+    return emptySquares()[0];
 };
 
 startGame();
+
+const emptySquares=()=>{
+    return origBoard.filter(s => typeof s=='number');
+};
+
+const checkTie =()=> {
+  if (emptySquares().length == 0) {
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].style.backgroundColor = "green";
+      cells[i].removeEventListener("click", turnClick, false);
+    }
+    declareWinner("Tie Game!");
+    return true;
+  }
+  return false;
+}
 
