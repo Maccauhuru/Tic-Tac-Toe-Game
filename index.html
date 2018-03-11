@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    <form>
+        <p>Please select your preferred choice</p>
+        <div>
+            <input type="radio" id="Oplayer" name="choosePlayer" value="O">
+            <label for="Oplayerlabel">Choose O</label>
+
+            <input type="radio" id="Xplayer" name="choosePlayer" value="X">
+            <label for="Xplayerlabel">Choose X</label>
+        </div>
+    </form>
     <table>
         <tr>
             <td class="cell" id="0"></td>
@@ -30,7 +40,7 @@
     <div class="endgame">
         <div class="text"></div>
     </div>
-    <button onclick="startGame()">Replay Game</button>
+    <button id="gameBtn" onclick="startGame()">Replay Game</button>
     <script src="js/main.js"></script>
 </body>
 

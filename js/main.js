@@ -1,7 +1,7 @@
 /*jshint esversion:6 */
 let origBoard;
-const huPlayer ='O';
-const aiPlayer ='X';
+let huPlayer ='O';
+let aiPlayer ='X';
 const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -14,10 +14,26 @@ const winCombos = [
 ];
 
 const cells = document.querySelectorAll('.cell');
+document.getElementById("gameBtn").innerHTML = 'Choose Option';
 
+const choosePlayer=()=>{
+        if (document.getElementById("Oplayer").checked === true) {
+            huPlayer = 'O';
+            aiPlayer = 'X';
+            document.getElementById("gameBtn").innerHTML = 'Replay Game';
+        } else if (document.getElementById("Xplayer").checked === true) {
+            console.log("Player X selected");
+            huPlayer = 'X';
+            aiPlayer = 'O';
+            document.getElementById("gameBtn").innerHTML = 'Replay Game';
+        } else {
+            console.log("error");
+        }
+};
 
 
 const startGame = ()=>{
+    choosePlayer();
     let endGame = document.querySelector(".endgame");
     endGame.style.display="none";
     origBoard = Array.from(Array(9).keys());
@@ -38,8 +54,8 @@ if (typeof origBoard[square.target.id] == "number") {
 const turn =(squareID,player)=>{
     origBoard[squareID] = player;
     document.getElementById(squareID).innerText = player;
-    let gameWon = checkWin(origBoard,player)
-    if(gameWon) gameOver(gameWon)
+    let gameWon = checkWin(origBoard,player);
+    if(gameWon) gameOver(gameWon);
 };
 
 const checkWin=(board, player)=> {
@@ -95,5 +111,5 @@ const checkTie =()=> {
     return true;
   }
   return false;
-}
+};
 
