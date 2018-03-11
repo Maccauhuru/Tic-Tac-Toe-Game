@@ -16,16 +16,15 @@ const winCombos = [
 const cells = document.querySelectorAll('.cell');
 document.getElementById("gameBtn").innerHTML = 'Choose Option';
 
+
 const choosePlayer=()=>{
         if (document.getElementById("Oplayer").checked === true) {
             huPlayer = 'O';
             aiPlayer = 'X';
-            document.getElementById("gameBtn").innerHTML = 'Replay Game';
         } else if (document.getElementById("Xplayer").checked === true) {
             console.log("Player X selected");
             huPlayer = 'X';
             aiPlayer = 'O';
-            document.getElementById("gameBtn").innerHTML = 'Replay Game';
         } else {
             console.log("error");
         }
@@ -42,6 +41,7 @@ const startGame = ()=>{
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click',turnClick,false);
     }
+    document.getElementById("gameBtn").innerHTML = 'Choose Option';
 };
 
 const turnClick =(square)=>{
@@ -84,6 +84,7 @@ const gameOver=(gameWon)=>{
         cells[i].removeEventListener('click', turnClick, false);
     }
     declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+    document.getElementById("gameBtn").innerHTML = 'Replay Game';
 };
 
 const declareWinner=(who)=>{
